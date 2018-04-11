@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React的事件</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+    <div id="example1"></div>
+    <div id="example2"></div>
+    <script type="text/babel">
+        var HelloMessage=React.createClass({
+            getInitialState:function () {
+                return {data:"菜鸟教程"};
+            },
+            handleClick:function () {
+                this.setState({data:"Runoob!!"});
+            },
+            render:function () {
+                return (
+                    <div>
+                        <button type="button" onClick={this.handleClick}>点我</button>
+                        <h4>{this.state.data}</h4>
+                    </div>
+                );
+            }
+        });
+        ReactDOM.render(
+            <HelloMessage/>,
+            document.getElementById('example1')
+        );
+    </script>
+    <script type="text/babel">
+        var Content=React.createClass({
+            render:function () {
+                return (
+                    <div>
+                        <button type="button" onClick={this.props.clickMe}>点我</button>
+                        <h4>{this.props.data}</h4>
+                    </div>
+                );
+            }
+        });
+        var HelloMessage2=React.createClass({
+            getInitialState:function () {
+              return {data:"教程"}
+            },
+            handleClick:function (event) {
+                this.setState({data:"Runoob!!!"});
+            },
+            render:function () {
+                return (
+                    <div>
+                        <Content clickMe={this.handleClick} data={this.state.data}/>
+                    </div>
+                );
+            }
+        });
+        ReactDOM.render(
+            <HelloMessage2/>,
+            document.getElementById('example2')
+        );
+    </script>
+</body>
+</html>
